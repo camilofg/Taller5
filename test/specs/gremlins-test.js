@@ -4,7 +4,7 @@ function loadScript(callback) {
 	if(s.addEventListener) { 
 		s.addEventListener('load',callback,false);
 	} else if(s.readyState) {
-		s.onreadystatechange = callback
+		s.onreadystatechange = callback;
 	}
 	document.body.appendChild(s);
 }
@@ -18,20 +18,18 @@ function unleashGremlins(ttl, callback) {
     var horde = window.gremlins.createHorde()
     .gremlin(gremlins.species.clicker().clickTypes(['click'])
       .canClick(function(element){
-        browser.logger.info($(element).id);
-        return ($(element.is('button' || 'a')).length());// && $(element).innerHTML != undefined);
+        return (element.tagName.toLowerCase() == ('button' || 'a') && element.innerHTML != undefined);
       })
     )
     .gremlin(gremlins.species.formFiller()
       .canFillElement(function(element){
-        browser.logger.info($(element).id);
-        return ($(element).is('input'));// && $(element).innerHTML != undefined);
+        return (element.tagName.toLowerCase() == 'input' && element.innerHTML != 'undefined');
       })
     )
     .gremlin(gremlins.species.toucher()
-      // .canTouch(function(element){
-      //   return $(element).innerHTML != undefined;
-      // })
+      .canTouch(function(element){
+        return element.innerHTML != undefined;
+      })
     )
     .gremlin(gremlins.species.scroller())
     .gremlin(gremlins.species.typer());
@@ -64,7 +62,7 @@ describe('Monkey testing with gremlins ', function () {
   afterAll(function() {
 	 browser.log('browser').value.forEach(function(log) { 
 		 browser.logger.info(log.message);//.split(' ')[2]);
-	 ;});
+	 });
   });
 
 });

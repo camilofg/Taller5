@@ -9,6 +9,7 @@
   "author": "Sebastian Sierra",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^3.2.1",
     "webdriverio": "^4.8.0"
   },
   "devDependencies": {
